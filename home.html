@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSmart - Your Online Store</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background-color: #f0f2f5;
+    }
+
+    header {
+      background-color: #0077b6;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin: 5px 0 0 0;
+      font-size: 1.1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 15px 0;
+      background-color: #023e8a;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      background-color: #00b4d8;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #90e0ef;
+      color: #023e8a;
+    }
+
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin: 25px 0;
+    }
+
+    .search-bar input[type="text"] {
+      width: 350px;
+      padding: 12px;
+      border-radius: 8px 0 0 8px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .search-bar button {
+      padding: 12px;
+      border: none;
+      background-color: #00b4d8;
+      color: white;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .search-bar button:hover {
+      background-color: #90e0ef;
+      color: #023e8a;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .product-card {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .product-card h3 {
+      margin: 12px 0 8px;
+      font-size: 1.1rem;
+      color: #0077b6;
+    }
+
+    .product-card p {
+      color: #555;
+      margin: 5px 0;
+      font-weight: bold;
+    }
+
+    .product-card button {
+      padding: 10px 18px;
+      border: none;
+      background-color: #0077b6;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .product-card button:hover {
+      background-color: #00b4d8;
+    }
+
+  </style>
+</head>
+<body>
+
+   <header>
+    <h1>ShopSmart</h1>
+    <p>Your one-stop online shop for quality products</p>
+  </header>
+
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="orders.html">Orders</a>
+    <a href="cart.html">Cart</a>
+    <a href="payment.html">Payment</a>
+  </nav>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search for products...">
+    <button>Search</button>
+  </div>
+
+  <div class="products">
+    <!-- 20 Product Cards with real images -->
+
+    <div class="product-card">
+      <img src="https://th.bing.com/th/id/OPAC.EZ95gTWKJIoqzg474C474?w=592&h=550&o=5&dpr=1.3&pid=21.1" alt="Product 2">
+      <h3>Smart Watch</h3>
+      <p>$129.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://img.tatacliq.com/images/i16//437Wx649H/MP000000021574289_437Wx649H_202403160237461.jpeg" alt="Product 3">
+      <h3>Leather Shoes</h3>
+      <p>$89.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://www.bing.com/th?id=OPAC.rl56aBcOtc6QRA474C474&o=5&pid=21.1&w=140&h=200&rs=1&qlt=100&dpr=1.3&o=2&c=8" alt="Product 4">
+      <h3>Backpack</h3>
+      <p>$49.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://www.byrdie.com/thmb/L0sB3yECOEAmY71LFAuIbb8fvP0=/fit-in/1500x1000/filters:no_upscale():max_bytes(150000):strip_icc()/KALIYADI-765b720bd04b4da3b1457bf6774f99ae.jpg" alt="Product 5">
+      <h3>Sunglasses</h3>
+      <p>$19.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://i5.walmartimages.com/asr/cdaaab64-5ea7-4d8f-969f-cff666244723.ff62693361b001ebbaf41145d23c0f13.jpeg" alt="Product 6">
+      <h3>Bluetooth Speaker</h3>
+      <p>$39.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/379988/02/fnd/IND/fmt/png/Scorch-Runner-V2-Men's-Running-Shoes" alt="Product 7">
+      <h3>Running Shoes</h3>
+      <p>$69.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71sYkdV+D7L._SL1500_.jpg" alt="Product 8">
+      <h3>Casual Shirt</h3>
+      <p>$25.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://images.squarespace-cdn.com/content/v1/58b6500a725e258406d1b97f/1602776655635-KDWUPMNID3VGTRP1JU7J/image-asset.jpeg" alt="Product 9">
+      <h3>Camera</h3>
+      <p>$499.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://rukminim2.flixcart.com/image/612/612/kumzpu80/mouse/b/m/s/usb-gaming-optical-mouse-for-desktop-computer-notebook-laptop-original-imag7phsyhwthzx6.jpeg?q=70" alt="Product 10">
+      <h3>Gaming Mouse</h3>
+      <p>$29.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://rukminim1.flixcart.com/image/300/300/jmawvbk0/fitness-band/g/e/2/m3-plus-ip67-waterproof-blood-pressure-sleep-heart-rate-original-imaf98jm6drk2gxr.jpeg?q=90" alt="Product 11">
+      <h3>Fitness Tracker</h3>
+      <p>$59.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://www.bing.com/th?id=OPAC.uXLb%2beQwPwu%2brw474C474&o=5&pid=21.1&w=128&h=188&rs=1&qlt=100&dpr=1.3&o=2&bw=6&bc=FFFFFF" alt="Product 12">
+      <h3>Water Bottle</h3>
+      <p>$15.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://static2.jetpens.com/images/a/000/164/164680.jpg?ba=middle%2Ccenter&balph=3&blend64=aHR0cDovL3d3dy5qZXRwZW5zLmNvbS9pbWFnZXMvYXNzZXRzL3dhdGVybWFyazIucG5n&bm=difference&bs=inherit&mark64=aHR0cDovL3d3dy5qZXRwZW5zLmNvbS9pbWFnZXMvYXNzZXRzL3dhdGVybWFyazEucG5n&markalign=top%2Cright&markalpha=30&markscale=16&q=90&s=f1dd9fea10fcea21d8cae9d29d70ef13" alt="Product 13">
+      <h3>Notebook</h3>
+      <p>$9.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6298/6298660ld.jpg" alt="Product 14">
+      <h3>Headset</h3>
+      <p>$39.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/61s7RGRwSoL.jpg" alt="Product 15">
+      <h3>Desk Lamp</h3>
+      <p>$22.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71c9U4sdMSL._AC_SL1500_.jpg" alt="Product 16">
+      <h3>Wireless Charger</h3>
+      <p>$29.99</p>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class

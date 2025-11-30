@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopSmart - Orders</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background-color: #f0f2f5; }
+    header { background-color: #0077b6; color: white; padding: 20px; text-align: center; }
+    nav { display: flex; justify-content: center; gap: 15px; padding: 15px 0; background-color: #023e8a; }
+    nav a { text-decoration: none; color: white; padding: 10px 20px; background-color: #00b4d8; border-radius: 8px; font-weight: bold; transition: 0.3s; }
+    nav a:hover { background-color: #90e0ef; color: #023e8a; }
+    .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
+    .order-card, .new-order { background-color: white; padding: 20px; margin-bottom: 25px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .order-header { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 15px; }
+    .order-header div { margin: 5px 0; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+    th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+    th { background-color: #00b4d8; color: white; }
+    .total { font-weight: bold; text-align: right; margin-bottom: 10px; }
+    .pay-btn, .place-btn { padding: 10px 20px; background-color: #0077b6; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+    .pay-btn:hover, .place-btn:hover { background-color: #00b4d8; }
+    .paid { color: green; font-weight: bold; }
+    .unpaid { color: red; font-weight: bold; }
+    input[type="number"] { width: 60px; }
+    .new-order h2 { color: #0077b6; margin-bottom: 15px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>ShopSmart - Orders</h1>
+</header>
+
+<nav>
+  <a href="home.html">Home</a>
+  <a href="orders.html">Orders</a>
+  <a href="cart.html">Cart</a>
+  <a href="payment.html">Payment</a>
+</nav>
+
+<div class="container">
+
+  <!-- New Order Section -->
+  <div class="new-order">
+    <h2>Create New Order</h2>
+    <table id="productTable">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Product Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" class="product-select"></td>
+          <td>Wireless Headphones</td>
+          <td>$59.99</td>
+          <td><input type="number" value="1" min="1" class="qty"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="product-select"></td>
+          <td>Smart Watch</td>
+          <td>$129.99</td>
+          <td><input type="number" value="1" min="1" class="qty"></td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="product-select"></td>
+          <td>Backpack</td>
+          <td>$49.99</td>
+          <td><input type="number" value="1" min="1" class="qty"></td>
+        </tr>
+      </tbody>
+    </table>
+    <label for="customerName">Customer Name:</label>
+    <input type="text" id="customerName" placeholder="Enter your name">
+    <button class="place-btn" onclick="placeOrder()">Place Order</button>
+  </div>
+
+  <!-- Existing Orders -->
+  <div id="ordersContainer">
+    <!-- Orders dynamically appear here -->
+  </div>
+
+</div>
+
+<script>
+  // Function to generate unique order ID
+  function generateOrderID() {
+    return 'SS' + Math.floor(Math.random() * 100000);
+  }
+
+  // Function to display existing orders
+  function loadOrders() {
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    let container = document.getElementById('ordersContainer');
+    container.innerHTML = '';
+
+    if (orders.length === 0) {
+      container.innerHTML = "<p>No orders placed yet.</p>";
+      return;
+    }
+
+    orders.forEach((order, index) => {
+      let orderCard = document.createElement('div');
+      orderCard.className = 'order-card';
+
+      let productsHtml = '';
+      order.products.forEach(item => {
+        let itemTotal = (item.price * item.quantity).toFixed(2);
+        productsHtml += `
+          <tr>
+            <td>${item.name}</td>
+            <td>$${item.price.toFixed(2)}</td>
+            <td>${item.quantity}</td>
+            <td>$${itemTotal}</td>
+          </tr>
+        `;
+      });
+
+      orderCard.innerHTML = `
+        <div class="order-header">
+          <div><strong>Order ID:</strong> ${order.id}</div>
+          <div><strong>Date:</strong> ${order.date}</div>
+          <div><strong>Customer:</strong> ${order.customer}</div>
+          <div><strong>Payment Status:</strong> <span class="${order.paid ? 'paid' : 'unpaid'}">${order.paid ? 'Paid' : 'Unpaid'}</span></div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${productsHtml}
+          </tbody>
+        </table>
+        <div class="total">Grand Total: $${order.total.toFixed(2)}</div>
+        ${order.paid ? '' : `<button class="pay-btn" onclick="payNow(${index})">Pay Now</button>`}
+      `;
+      container.appendChild(orderCard);
+    });
+  }
+
+  // Place a new order
+  function placeOrder() {
+    let productRows = document.querySelectorAll('#productTable tbody tr');
+    let selectedProducts = [];
+
+    productRows.forEach(row => {
+      let checkbox = row.querySelector('.product-select');
+      if(checkbox.checked){
+        let name = row.cells[1].innerText;
+        let price = parseFloat(row.cells[2].innerText.replace('$',''));
+        let quantity = parseInt(row.querySelector('.qty').value);
+        selectedProducts.push({name, price, quantity});
+      }
+    });
+
+    if(selectedProducts.length === 0){
+      alert("Select at least one product!");
+      return;
+    }
+
+    let customerName = document.getElementById('customerName').value;
+    if(!customerName){
+      alert("Enter customer name!");
+      return;
+    }
+
+    let orderID = generateOrderID();
+    let now = new Date();
+    let orderDate = `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+    let grandTotal = selectedProducts.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    let orders = JSON.parse(localStorage.getItem('orders')) || [];
+    orders.push({
+      id: orderID,
+      date: orderDate,
+      customer: customerName,
+      products: selectedProducts,
+      total: grandTotal,
+      paid: false
+    });
+
+    localStorage.setItem('orders', JSON.stringify(orders));
+    alert(`Order placed successfully! Order ID: ${orderID}`);
+    loadOrders();
+  }
+
+  // Redirect to payment page for specific order
+  function payNow(index){
+    localStorage.setItem('currentOrderIndex', index);
+    window.location.href = 'payment.html';
+  }
+
+  loadOrders();
+</script>
+
+</body>
+</html>
